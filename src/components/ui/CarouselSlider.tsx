@@ -1,5 +1,3 @@
-// src/components/ui/CarouselSlider.tsx
-'use client';
 import React, { useState } from 'react';
 import { useDrag } from 'react-dnd';
 
@@ -33,7 +31,7 @@ const CarouselSlider = () => {
 
   return (
     <div
-      ref={drag}
+      ref={drag as (instance: HTMLDivElement | null) => void}
       className={`relative w-full max-w-md p-4 bg-white rounded-lg shadow-md ${isDragging ? 'opacity-50' : 'opacity-100'} cursor-move`}
     >
       <div className="relative overflow-hidden">
