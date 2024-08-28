@@ -1,3 +1,4 @@
+'use client';
 import React, { useState } from 'react';
 import { useDrag } from 'react-dnd';
 
@@ -5,7 +6,7 @@ const itemTypes = {
   CAROUSEL: 'carousel',
 };
 
-const CarouselSlider = () => {
+const CarouselSlider: React.FC = () => {
   const [{ isDragging }, drag] = useDrag({
     type: itemTypes.CAROUSEL,
     item: { type: itemTypes.CAROUSEL },
@@ -31,7 +32,7 @@ const CarouselSlider = () => {
 
   return (
     <div
-      ref={drag as (instance: HTMLDivElement | null) => void}
+      ref={drag as any} // Use `as any` to bypass TypeScript error
       className={`relative w-full max-w-md p-4 bg-white rounded-lg shadow-md ${isDragging ? 'opacity-50' : 'opacity-100'} cursor-move`}
     >
       <div className="relative overflow-hidden">
