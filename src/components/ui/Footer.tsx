@@ -1,6 +1,6 @@
 // src/components/ui/Footer.tsx
 'use client';
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import { useDrag } from 'react-dnd';
 
 const itemTypes = {
@@ -8,7 +8,7 @@ const itemTypes = {
 };
 
 const Footer = () => {
-  const [{ isDragging }, drag] = useDrag({
+  const [{ isDragging }, drag, preview] = useDrag({
     type: itemTypes.FOOTER,
     item: { type: itemTypes.FOOTER },
     collect: (monitor) => ({
@@ -16,9 +16,17 @@ const Footer = () => {
     }),
   });
 
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (ref.current) {
+      drag(ref.current);
+    }
+  }, [drag]);
+
   return (
     <div
-      ref={drag}
+      ref={ref}
       className={`relative p-6 bg-gray-900 text-white rounded-lg shadow-md ${isDragging ? 'opacity-50' : 'opacity-100'} cursor-move`}
     >
       <div className="flex justify-between items-center">
